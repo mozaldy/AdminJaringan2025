@@ -4,7 +4,7 @@
 <!--toc:start-->
 - [Workshop Administrasi Jaringan Tugas 1 - **REVIEW**](#workshop-administrasi-jaringan-tugas-1-review)
   - [Tugas 1: Analisa file http.cap](#tugas-1-analisa-file-httpcap)
-    - [1. Download file sampel `http.cap` [link](https://wiki.wireshark.org/uploads/27707187aeb30df68e70c8fb9d614981/http.cap)](#1-download-file-sampel-httpcap-linkhttpswikiwiresharkorguploads27707187aeb30df68e70c8fb9d614981httpcap)
+    - [1. Download file sampel `http.cap`](#1-download-file-sampel-httpcap-linkhttpswikiwiresharkorguploads27707187aeb30df68e70c8fb9d614981httpcap)
     - [2. Explorasi dan Analisis dari `http.cap` menggunakan wireshark](#2-explorasi-dan-analisis-dari-httpcap-menggunakan-wireshark)
   - [Tugas 2: Analisis Gambar Types of Data Deliveries](#tugas-2-analisis-gambar-types-of-data-deliveries)
     - [1. Node to Node (Data Link Layer)](#1-node-to-node-data-link-layer)
