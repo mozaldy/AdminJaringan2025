@@ -1,5 +1,10 @@
+<p align="center">
+  <img src="../Logo_PENS.png" alt="Logo">
+</p>
 
-# Workshop Administrasi Jaringan Tugas 1 - **REVIEW**
+<h1 align="center">Admin Jaringan 2025</h1>
+
+# Tugas 1 - **REVIEW**
 
 <!--toc:start-->
 - [Workshop Administrasi Jaringan Tugas 1 - **REVIEW**](#workshop-administrasi-jaringan-tugas-1-review)
