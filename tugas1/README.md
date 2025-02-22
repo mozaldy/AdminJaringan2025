@@ -4,20 +4,15 @@
 <!--toc:start-->
 - [Workshop Administrasi Jaringan Tugas 1 - **REVIEW**](#workshop-administrasi-jaringan-tugas-1-review)
   - [Tugas 1: Analisa file http.cap](#tugas-1-analisa-file-httpcap)
-    - [1. Download file sampel `http.cap`](#1-download-file-sampel-httpcap-linkhttpswikiwiresharkorguploads27707187aeb30df68e70c8fb9d614981httpcap)
-    - [2. Explorasi dan Analisis dari `http.cap` menggunakan wireshark](#2-explorasi-dan-analisis-dari-httpcap-menggunakan-wireshark)
+    - [1. Download file sampel `http.cap`](#1-download-file-sampel-httpcap)
+    - [2. Explorasi dan Analisis dari `http.cap` menggunakan Wireshark](#2-explorasi-dan-analisis-dari-httpcap-menggunakan-wireshark)
   - [Tugas 2: Analisis Gambar Types of Data Deliveries](#tugas-2-analisis-gambar-types-of-data-deliveries)
     - [1. Node to Node (Data Link Layer)](#1-node-to-node-data-link-layer)
     - [2. Host to Host (Network Layer)](#2-host-to-host-network-layer)
     - [3. Process to Process (Transport Layer)](#3-process-to-process-transport-layer)
   - [Tugas 3: Resume Tahapan TCP](#tugas-3-resume-tahapan-tcp)
-    - [1. TCP Establishment (Three-Way Handshake)](#1-tcp-establishment-three-way-handshake)
-    - [2. Data Transfer](#2-data-transfer)
-      - [Segmentasi](#segmentasi)
-      - [Flow Control](#flow-control)
-      - [Error Control](#error-control)
-    - [3. TCP Termination (Four-Way Handshake)](#3-tcp-termination-four-way-handshake)
 <!--toc:end-->
+
 
 
 ## Tugas 1: Analisa file http.cap
@@ -53,58 +48,18 @@ Process-to-process communication adalah bentuk komunikasi dalam jaringan yang me
 
 ## Tugas 3: Resume Tahapan TCP
 
-### 1. TCP Establishment (Three-Way Handshake)
-1. **Langkah 1 (SYN)**
-   - Client mengirim paket SYN ke server
-   - Berisi sequence number awal acak (SEQ=100)
-   - Flag SYN = 1
+1. **Three-Way Handshake** (Membangun Koneksi)  
+   - **SYN**: Klien mengirim paket SYN (synchronize) ke server untuk memulai koneksi.  
+   - **SYN-ACK**: Server merespons dengan SYN-ACK (synchronize-acknowledge) untuk menyetujui koneksi.  
+   - **ACK**: Klien mengirim paket ACK (acknowledge), menandakan koneksi telah terbentuk.  
 
-2. **Langkah 2 (SYN-ACK)**
-   - Server merespon dengan paket SYN-ACK
-   - Berisi acknowledgment (ACK=101)
-   - Sequence number server (SEQ=300)
-   - Flag SYN dan ACK = 1
+2. **Data Transmission** (Pengiriman Data)  
+   - Data dikirim dalam bentuk segmen TCP yang diberi nomor urut (sequence number).  
+   - Penerima mengirim ACK untuk setiap segmen yang diterima dengan sukses.  
+   - Jika ada segmen yang hilang atau rusak, pengirim akan mengirim ulang (retransmission).  
 
-3. **Langkah 3 (ACK)**
-   - Client mengirim ACK final
-   - Berisi acknowledgment (ACK=301)
-   - Koneksi siap untuk transfer data
-
-### 2. Data Transfer
-
-#### Segmentasi
-- Data dipecah menjadi segmen-segmen kecil
-- Setiap segmen memiliki sequence number
-- Maximum Segment Size (MSS) menentukan ukuran maksimal
-
-#### Flow Control
-- Menggunakan sliding window
-- Receiver window menunjukkan kapasitas buffer penerima
-- Mencegah overloading pada penerima
-
-#### Error Control
-- Menggunakan checksums untuk deteksi error
-- Retransmission untuk segmen hilang/rusak
-- Acknowledgment untuk konfirmasi penerimaan
-
-### 3. TCP Termination (Four-Way Handshake)
-
-1. **Langkah 1 (FIN)**
-   - Client mengirim FIN ke server
-   - Menandakan client selesai mengirim data
-   - Client masih bisa menerima data
-
-2. **Langkah 2 (ACK)**
-   - Server mengirim ACK untuk FIN client
-   - Server masih bisa mengirim data
-   - Client menunggu FIN dari server
-
-3. **Langkah 3 (FIN)**
-   - Server mengirim FIN ke client
-   - Menandakan server juga selesai
-   - Semua data sudah terkirim
-
-4. **Langkah 4 (ACK)**
-   - Client mengirim ACK terakhir
-   - Koneksi terputus setelah timeout
-   - Resources dibebaskan
+3. **Four-Way Handshake** (Terminasi Koneksi)  
+   - **FIN**: Salah satu pihak mengirim paket FIN (finish) untuk mengakhiri koneksi.  
+   - **ACK**: Pihak penerima mengonfirmasi dengan paket ACK.  
+   - **FIN**: Penerima juga mengirim FIN untuk menutup koneksi dari sisinya.  
+   - **ACK**: Pengirim mengirim paket ACK terakhir, menandakan koneksi ditutup sepenuhnya.  
