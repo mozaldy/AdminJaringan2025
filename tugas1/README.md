@@ -4,6 +4,13 @@
 
 <h1 align="center">Admin Jaringan 2025</h1>
 
+```
+Dosen Pengampu: Dr Ferry Astika Saputra ST, M.Sc
+Nama: Mohammad Rizaldy Ramadhan
+NRP: 3123600011
+Kelas: D4 IT A
+```
+
 # Tugas 1 - **REVIEW**
 
 <!--toc:start-->
@@ -17,7 +24,6 @@
     - [3. Process to Process (Transport Layer)](#3-process-to-process-transport-layer)
   - [Tugas 3: Resume Tahapan TCP](#tugas-3-resume-tahapan-tcp)
 <!--toc:end-->
-
 
 
 ## Tugas 1: Analisa file http.cap
