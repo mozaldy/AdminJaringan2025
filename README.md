@@ -14,3 +14,5 @@ Kelas: D4 IT A
 
 ## Table of Contents:
 - [Tugas 1: **REVIEW**](/tugas1/README.md)
+- [Tugas 2: **Process Control**](/tugas2/README.md)
+- [Tugas 3: **FilesystemW**](/tugas3/README.md)
