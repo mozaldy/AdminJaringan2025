@@ -13,9 +13,7 @@ Kelas: D4 IT A
 
 # Tugas 2 - **Rangkuman Process Control**
 
-# Bab 4: Kontrol Proses
-
-![Kontrol Proses](https://www.sifars.com/blog/wp-content/uploads/2019/10/Procs-1024x577-1.png)
+![Kontrol Proses](https://www.computerscience.gcse.guru/wp-content/uploads/2018/01/computer_system.png)
 
 ## Komponen Proses
 

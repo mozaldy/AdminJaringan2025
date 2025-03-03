@@ -13,8 +13,6 @@ Kelas: D4 IT A
 
 # Tugas 3 - **Rangkuman Filesystem**
 
-# Bab 5: Sistem Berkas
-
 ![ikon-sistem-berkas](https://miro.medium.com/v2/resize:fit:752/1*quw0WvsLLCxad3WC6fjQ1Q.png)
 
 Tujuan utama sistem berkas adalah untuk mengatur dan merepresentasikan sumber daya penyimpanan sistem.
