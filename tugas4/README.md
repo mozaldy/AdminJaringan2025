@@ -63,7 +63,13 @@ Kelas: D4 IT A
             guest only = yes
             force create mode = 777
             force directory mode = 777
-    `
+    
+    $ sudo adduser debian
+    $ sudo smbpasswd -a debian
+    New SMB password:     # set passwords
+    Retype new SMB password:
+    Added user debian.
+    $ sudo usermod -aG sambalimited debian
 
 2. Check IP guest machine
    
@@ -112,6 +118,14 @@ Kelas: D4 IT A
             # inherit permissions from parent folder
             inherit permissions = yes
             comment = Limited Shared Folder
+            # add Samba user
+
+    $ sudo adduser debian
+    $ sudo smbpasswd -a debian
+    New SMB password:     # set passwords
+    Retype new SMB password:
+    Added user debian.
+    $ sudo usermod -aG sambalimited debian
     ```
 
 2. Check IP guest machine
@@ -166,5 +180,5 @@ Kelas: D4 IT A
     smb: \>
 4. (OPSIONAL) Koneksi dari windows
    ![images/image.png](images/image.png)
-    ```
+    
 ## Buat rangkuman tentanag package management
