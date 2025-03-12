@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>A&period; Instalasi NTP Client</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <p align="center">
+  <img src="file:///\\wsl.localhost\Ubuntu-24.04\home\zaldy\kuliah-main\semester4\adminjaringan2025\Logo_PENS.png" alt="Logo">
+</p>
+<link rel="stylesheet" href="github-markdown.css">
+<h1 align="center">Admin Jaringan 2025</h1>
+<pre><code>Dosen Pengampu: Dr Ferry Astika Saputra ST, M.Sc
+Nama: Mohammad Rizaldy Ramadhan
+NRP: 3123600011
+Kelas: D4 IT A
+</code></pre>
+<ul>
+<li><a href="#a-instalasi-ntp-client">A. Instalasi NTP Client</a></li>
+<li><a href="#b-instalasi-dan-konfigurasi-samba">B. Instalasi dan konfigurasi Samba</a>
+<ul>
+<li><a href="#1-membuat-public-shared-folder">1. Membuat public shared folder</a></li>
+<li><a href="#2-membuat-limited-shared-folder">2. Membuat limited shared folder</a></li>
+<li><a href="#3-akses-ke-folder-share-dari-cli-client">3. akses ke folder Share dari CLI client</a></li>
+</ul>
+</li>
+<li><a href="#c-rangkuman-tentang-package-management">C. Rangkuman tentang package management</a>
+<ul>
+<li><a href="#pendahuluan">Pendahuluan</a></li>
+<li><a href="#file-sourceslist">File <code>sources.list</code></a>
+<ul>
+<li><a href="#a-cara-user-mencari-dan-menampilkan-informasi">A. Cara user mencari dan menampilkan informasi</a></li>
+<li><a href="#b-cara-superuser-mencari-dan-menampilkan-informassi">B. Cara superuser mencari dan menampilkan informassi</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="a-instalasi-ntp-client">A. Instalasi NTP Client</h2>
+<ol>
+<li>install ntpsec<pre><code class="language-bash">$ sudo apt install ntpsec
+</code></pre>
+</li>
+<li>lakukan konfigurasi ntp di <code>/etc/ntpsec/ntp.conf</code> dengan merubah server sekarang menjadi server indonesia dari <a href="https://www.ntppool.org/en/zone/id">https://www.ntppool.org/en/zone/id</a> di baris 34-37<pre><code class="language-bash">$ vim /etc/ntpsec/ntp.conf
+34 <span class="hljs-comment">#pool 0.ubuntu.pool.ntp.org iburst</span>
+35 <span class="hljs-comment">#pool 1.ubuntu.pool.ntp.org iburst</span>
+36 <span class="hljs-comment">#pool 2.ubuntu.pool.ntp.org iburst</span>
+37 <span class="hljs-comment">#pool 3.ubuntu.pool.ntp.org iburst</span>
+38 server 0.id.pool.ntp.org
+39 server 1.id.pool.ntp.org
+40 server 2.id.pool.ntp.org
+41 server 3.id.pool.ntp.org
+</code></pre>
+</li>
+<li>Restart service ntpsec<pre><code class="language-bash">$ sudo systemctl restart ntpsec
+</code></pre>
+</li>
+<li>Verifikasi status<pre><code class="language-bash">$ ntpq -p
+    remote                                   refid      st t when poll reach   delay   offset   jitter
+=======================================================================================================
+103.169.192.230                         103.147.22.149   3 u    3   64    1  49.2101  -1.8870   0.0000
+14.102.153.110                          133.243.238.244  2 u   12   64    1  52.9380  -2.0695   0.0000
+103.177.8.230                           202.65.114.202   3 u   21   64    1  51.1884  -4.3603   0.0000
+116.12.46.30                            27.54.117.72     3 u   30   64    1  50.4119  -3.9637   0.0000
+185.125.190.58                          79.243.60.50     2 u   39   64    1 337.3182 -13.5331   0.0000
+</code></pre>
+</li>
+</ol>
+<h2 id="b-instalasi-dan-konfigurasi-samba">B. Instalasi dan konfigurasi Samba</h2>
+<h3 id="1-membuat-public-shared-folder">1. Membuat public shared folder</h3>
+<ol>
+<li>
+<p>Install dan konfigurasi samba serta buat folder yang akan di share</p>
+<pre><code class="language-bash">$ sudo apt install samba
+$ sudo <span class="hljs-built_in">mkdir</span> -p ~/shared_folder
+$ sudo <span class="hljs-built_in">chmod</span> -R 777 ~/shared_folder
+$ sudo vim /etc/samba/smb.conf
+    [shared]
+        path = /home/debian/shared_folder
+        comment = Publicly Shared Folder
+        writable = <span class="hljs-built_in">yes</span>
+        guest ok = <span class="hljs-built_in">yes</span>
+        guest only = <span class="hljs-built_in">yes</span>
+        force create mode = 777
+        force directory mode = 777
+
+$ sudo adduser debian
+$ sudo smbpasswd -a debian
+New SMB password:     <span class="hljs-comment"># set passwords</span>
+Retype new SMB password:
+Added user debian.
+$ sudo usermod -aG sambalimited debian
+
+</code></pre>
+</li>
+<li>
+<p>Check IP guest machine</p>
+<pre><code class="language-bash">$ ip a
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    <span class="hljs-built_in">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+    valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+    valid_lft forever preferred_lft forever
+2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    <span class="hljs-built_in">link</span>/ether 08:00:27:18:5c:83 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.56.101/24 brd 192.168.56.255 scope global dynamic enp0s3
+    valid_lft 402sec preferred_lft 402sec
+    inet6 fe80::a00:27ff:fe18:5c83/64 scope <span class="hljs-built_in">link</span>
+    valid_lft forever preferred_lft forever
+</code></pre>
+</li>
+</ol>
+<h3 id="2-membuat-limited-shared-folder">2. Membuat limited shared folder</h3>
+<ol>
+<li>
+<p>Install dan konfigurasi samba serta buat folder yang akan di share</p>
+<pre><code class="language-bash">$ sudo apt install samba
+$ sudo groupadd sambalimited
+$ sudo <span class="hljs-built_in">mkdir</span> -p ~/limited_shared_folder
+$ sudo <span class="hljs-built_in">chgrp</span> sambalimited ~/limited_shared_folder
+$ sudo <span class="hljs-built_in">chmod</span> -R 770 ~/limited_shared_folder
+$ sudo vim /etc/samba/smb.conf
+    [limited_shared]
+         path = /home/debian/limited_shared_folder
+        <span class="hljs-comment"># require authentication</span>
+        security = user
+        <span class="hljs-comment"># specify shared directory</span>
+        <span class="hljs-comment"># allow writing</span>
+        writable = <span class="hljs-built_in">yes</span>
+        <span class="hljs-comment"># not allow guest user (nobody)</span>
+        guest ok = no
+        <span class="hljs-comment"># allow only [smbgroup01] group</span>
+        valid <span class="hljs-built_in">users</span> = @sambalimited
+        <span class="hljs-comment"># set group for new files/directories to [smbgroup01]</span>
+        force group = sambalimited
+        <span class="hljs-comment"># set permission [770] when file created</span>
+        force create mode = 770
+        <span class="hljs-comment"># set permission [770] when folder created</span>
+        force directory mode = 770
+        <span class="hljs-comment"># inherit permissions from parent folder</span>
+        inherit permissions = <span class="hljs-built_in">yes</span>
+        comment = Limited Shared Folder
+        <span class="hljs-comment"># add Samba user</span>
+
+$ sudo adduser debian
+$ sudo smbpasswd -a debian
+New SMB password:     <span class="hljs-comment"># set passwords</span>
+Retype new SMB password:
+Added user debian.
+$ sudo usermod -aG sambalimited debian
+</code></pre>
+</li>
+<li>
+<p>Check IP guest machine</p>
+<pre><code class="language-bash">$ ip a
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    <span class="hljs-built_in">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+    valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+    valid_lft forever preferred_lft forever
+2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    <span class="hljs-built_in">link</span>/ether 08:00:27:18:5c:83 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.56.101/24 brd 192.168.56.255 scope global dynamic enp0s3
+    valid_lft 402sec preferred_lft 402sec
+    inet6 fe80::a00:27ff:fe18:5c83/64 scope <span class="hljs-built_in">link</span>
+    valid_lft forever preferred_lft forever
+</code></pre>
+</li>
+</ol>
+<h3 id="3-akses-ke-folder-share-dari-cli-client">3. akses ke folder Share dari CLI client</h3>
+<ol>
+<li>
+<p>Dari host machine, check apakah service samba di guest machine sudah bisa terlihat untuk Sharename <code>share</code> dan <code>limited_shared</code></p>
+<pre><code class="language-bash">$ smbclient -L //192.168.56.101/shared -N
+
+    Sharename       Type      Comment
+    ---------       ----      -------
+    <span class="hljs-built_in">print</span>$          Disk      Printer Drivers
+    shared          Disk      halo fajar
+    limited_shared  Disk      halo akbar private
+    IPC$            IPC       IPC Service (Samba 4.17.12-Debian)
+    nobody          Disk      Home Directories
+    
+</code></pre>
+</li>
+<li>
+<p>Apabila sudah terlihat, langsung connect untuk public shared folder</p>
+<pre><code class="language-bash">$ smbclient //192.168.56.101/shared -N
+Try <span class="hljs-string">&quot;help&quot;</span> to get a list of possible commands.
+smb: \&gt;
+</code></pre>
+</li>
+<li>
+<p>Apabila sudah terlihat, langsung connect dengan menginputkan username dan password untuk limited shared folder</p>
+<pre><code class="language-bash">$ smbclient //192.168.56.101/limited_shared -U debian
+Password <span class="hljs-keyword">for</span> [WORKGROUP\debian]:
+Try <span class="hljs-string">&quot;help&quot;</span> to get a list of possible commands.
+smb: \&gt; <span class="hljs-built_in">ls</span>
+.                                   D        0  Fri Mar  7 16:05:34 2025
+..                                  D        0  Fri Mar  7 16:06:20 2025
+foo.txt                             A       10  Fri Mar  7 16:05:34 2025
+
+            219851752 blocks of size 1024. 208610576 blocks available
+smb: \&gt;
+</code></pre>
+</li>
+<li>
+<p>(OPSIONAL) Koneksi dari windows
+<img src="file:///\\wsl.localhost\Ubuntu-24.04\home\zaldy\kuliah-main\semester4\adminjaringan2025\tugas4\images\image.png" alt="images/image.png"></p>
+</li>
+</ol>
+<h2 id="c-rangkuman-tentang-package-management">C. Rangkuman tentang package management</h2>
+<h3 id="pendahuluan">Pendahuluan</h3>
+<p>Debian GNU/Linux menggunakan metodologi 'repository' untuk distribusi aplikasi. Metodologi ini memungkinkan untuk sentralisasi software dan juga penggunakan antarmuka yang sederhana untuk mengelola sistem pengguna tanpa harus berkunjung ke website pemilik software yang digunakan.</p>
+<h3 id="file-sourceslist">File <code>sources.list</code></h3>
+<p>alamat internet untuk repository debian disimpan di <code>/etc/apt/sources.list</code></p>
+<p>untuk merubah file tersebut, bisa menggunakan 2 command berikut dengan privilege superuser.</p>
+<pre><code class="language-bash">$ apt edit-sources
+<span class="hljs-comment"># atau, langsung akses file menggunakan text editor</span>
+$ vim /etc/apt/sources.list
+</code></pre>
+<p><img src="file:///\\wsl.localhost\Ubuntu-24.04\home\zaldy\kuliah-main\semester4\adminjaringan2025\tugas4\images\1.png" alt="&quot;Gambar hasil membuka dengan sources.list dengan vim&quot;"></p>
+<ul>
+<li><strong>deb</strong>: Paket biner yang siap diinstal</li>
+<li><strong>deb-src</strong>: Kode sumber paket</li>
+<li><strong>bookworm</strong>: Nama rilis Debian (versi 12)</li>
+<li><strong>main</strong>: Komponen resmi Debian, hanya perangkat lunak free</li>
+<li><strong>contrib</strong>: Perangkat lunak free yang membutuhkan dependensi non-free</li>
+<li><strong>bookworm-security</strong>: Repositori pembaruan keamanan untuk Bookworm</li>
+<li><strong>bookworm-updates</strong>: Pembaruan reguler sebelum rilis resmi</li>
+</ul>
+<ol start="2">
+<li>APT di terminal
+Untuk mengelola sebuah software yang tersedia di repository dan di sistem, Debian menggunakan sebuah software dengan nama <code>apt</code> (Advanced Package Tool) yang bisa digunakan melalui terminal.</li>
+</ol>
+<h4 id="a-cara-user-mencari-dan-menampilkan-informasi">A. Cara user mencari dan menampilkan informasi</h4>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>apt show sesuatu</code></td>
+<td>Menampilkan informasi tentang package <code>sesuatu</code></td>
+</tr>
+<tr>
+<td><code>apt search sesuatu</code></td>
+<td>Mencari package <code>sesuatu</code></td>
+</tr>
+<tr>
+<td><code>apt-cache policy sesuatu</code></td>
+<td>Mencari versi yang ada untuk package <code>sesuatu</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="b-cara-superuser-mencari-dan-menampilkan-informassi">B. Cara superuser mencari dan menampilkan informassi</h4>
+<table>
+<thead>
+<tr>
+<th>Perintah</th>
+<th>Deskripsi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>apt full-upgrade</code></td>
+<td>Memperbarui paket yang terinstal, dengan menambahkan/menghapus paket lain jika diperlukan</td>
+</tr>
+<tr>
+<td><code>apt remove sesuatu</code></td>
+<td>Menghapus paket <code>sesuatu</code>, tetapi tidak menghapus file konfigurasi</td>
+</tr>
+<tr>
+<td><code>apt autoremove</code></td>
+<td>Menghapus paket yang tidak diperlukan secara otomatis</td>
+</tr>
+<tr>
+<td><code>apt purge sesuatu</code></td>
+<td>Menghapus paket <code>sesuatu</code> beserta file konfigurasinya</td>
+</tr>
+<tr>
+<td><code>apt clean</code></td>
+<td>Membersihkan cache lokal dari paket yang terinstal</td>
+</tr>
+<tr>
+<td><code>apt autoclean</code></td>
+<td>Membersihkan cache lokal dari paket yang sudah usang</td>
+</tr>
+<tr>
+<td><code>apt-mark showmanual</code></td>
+<td>Menandai paket sebagai &quot;diinstal secara manual&quot;</td>
+</tr>
+<tr>
+<td><em><strong>TIPS</strong></em></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Command All-In-One untuk update informasi repo, update sistem, dan membersihkan cache:
+<code>apt update &amp;&amp; apt upgrade &amp;&amp; apt autoclean</code></p>
+</blockquote>
+<blockquote>
+<p>Command untuk membersihkan package yang tidak digunakan:
+<code>apt autoremove --purge</code></p>
+</blockquote>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>
